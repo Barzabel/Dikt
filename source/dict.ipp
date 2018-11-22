@@ -23,9 +23,9 @@ T &NativeDict<T>::operator[](string key) {
 	int index = this->hash->find(key);
 	for (int i = 0; i < this->hash->get_step(); i++)
 	{
-		if (this->hash->at(index + this->hash->get_step()*i) == key)
+		if (this->hash->at((index + this->hash->get_step()*i)%this->size) == key)
 		{
-			return this->arrvalue[index + this->hash->get_step()*i];
+			return this->arrvalue[(index + this->hash->get_step()*i)%this->size];
 		}
 	}
 }
@@ -40,9 +40,9 @@ void NativeDict<T>::put(std::string key, T value) {
 		int index = this->hash->find(key);
 		for (int i = 0; i < this->hash->get_step(); i++)
 		{
-			if(this->hash->at(index + this->hash->get_step()*i)==key)
+			if(this->hash->at((index + this->hash->get_step()*i)%this->size)==key)
 			{
-				this->arrvalue[index + this->hash->get_step()*i] = value;
+				this->arrvalue[(index + this->hash->get_step()*i) % this->size] = value;
 				return;
 			}
 		}
